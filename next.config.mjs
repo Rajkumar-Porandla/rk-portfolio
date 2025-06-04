@@ -7,7 +7,20 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'blob.v0.dev',
+      },
+    ],
+    unoptimized: false,
+  },
+  experimental: {
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
 }
 
