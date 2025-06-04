@@ -1,0 +1,282 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: "Inter", sans-serif;
+  --font-sora: "Sora", sans-serif;
+
+  /* Premium Color Palette */
+  --primary-50: #eff6ff;
+  --primary-100: #dbeafe;
+  --primary-200: #bfdbfe;
+  --primary-300: #93c5fd;
+  --primary-400: #60a5fa;
+  --primary-500: #3b82f6;
+  --primary-600: #2563eb;
+  --primary-700: #1d4ed8;
+  --primary-800: #1e40af;
+  --primary-900: #1e3a8a;
+
+  /* Premium Gradients */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-dark: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  cursor: none;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100;
+  }
+
+  html {
+    @apply bg-gray-950;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16;
+  }
+
+  .container-width {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .professional-card {
+    @apply bg-gray-900/50 backdrop-blur-sm border border-gray-800/50 rounded-2xl;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  .professional-button {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300;
+    box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
+  }
+
+  .professional-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.4);
+  }
+
+  .creatorpreneur-accent {
+    @apply text-blue-500 font-semibold;
+  }
+
+  .professional-grid {
+    @apply grid gap-8 md:gap-12;
+  }
+
+  .smooth-reveal {
+    @apply opacity-0 translate-y-8;
+    animation: reveal 0.8s ease-out forwards;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .professional-shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .creatorpreneur-border {
+    @apply border border-gray-800/50 hover:border-gray-700/50 transition-colors duration-300;
+  }
+
+  /* Premium animations */
+  .text-shimmer {
+    background: linear-gradient(to right, var(--primary-500) 0%, var(--primary-300) 30%, var(--primary-500) 100%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: text-shimmer 3s linear infinite;
+  }
+
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+  }
+
+  .premium-border {
+    position: relative;
+  }
+
+  .premium-border::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .premium-card {
+    @apply bg-gray-900/50 backdrop-blur-sm rounded-2xl;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0
+      rgba(255, 255, 255, 0.1);
+  }
+
+  .premium-button {
+    @apply relative overflow-hidden rounded-xl font-semibold transition-all duration-300;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0
+      rgba(255, 255, 255, 0.2);
+  }
+
+  .premium-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -5px rgba(59, 130, 246, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2), inset 0 1px 0
+      rgba(255, 255, 255, 0.3);
+  }
+
+  .premium-button::before {
+    content: "";
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  }
+
+  .premium-button:hover::before {
+    @apply opacity-100;
+  }
+}
+
+/* Premium Animations */
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Selection */
+::selection {
+  @apply bg-blue-600/20 text-blue-300;
+}
+
+/* Focus styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-blue-500/50 ring-offset-2 ring-offset-gray-950;
+}
+
+/* Loading animation */
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Professional typography */
+.professional-heading {
+  @apply font-sora font-bold tracking-tight;
+}
+
+.professional-text {
+  @apply text-gray-400 leading-relaxed;
+}
+
+.creatorpreneur-highlight {
+  @apply text-blue-400 font-medium;
+}
+
+/* Disable cursor for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
