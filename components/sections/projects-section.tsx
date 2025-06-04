@@ -260,7 +260,10 @@ export function ProjectsSection() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card3D className="bg-white dark:bg-gray-800 h-full cursor-pointer" onClick={() => setSelectedProject(project)}>
+                <Card3D
+                  className="bg-white dark:bg-gray-800 h-full cursor-pointer"
+                  onClick={() => setSelectedProject(project)}
+                >
                   <div className="relative overflow-hidden">
                     <Image
                       src={project.image || "/placeholder.svg"}
@@ -339,4 +342,112 @@ export function ProjectsSection() {
                       </Button>
                     </div>
                   </div>
-                \
+                </Card3D>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+
+      {/* Project Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-4 right-4 z-10 rounded-full"
+                onClick={() => setSelectedProject(null)}
+              >
+                <X className="h-6 w-6" />
+              </Button>
+
+              <div className="relative">
+                <Image
+                  src={selectedProject.image || "/placeholder.svg"}
+                  alt={`${selectedProject.title} - Full Screenshot`}
+                  width={800}
+                  height={400}
+                  className="w-full h-64 md:h-80 object-cover rounded-t-2xl"
+                />
+                <div className="absolute top-4 right-4 flex space-x-2">
+                  <div className="bg-orange-500/90 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm flex items-center space-x-2">
+                    <Clock className="w-4 h-4" />
+                    <span>In Development</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="font-sora font-bold text-2xl md:text-3xl mb-2">{selectedProject.title}</h3>
+                    {selectedProject.featured && (
+                      <span className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
+                        Featured Project
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                  {selectedProject.longDescription}
+                </p>
+
+                <div className="mb-6">
+                  <h4 className="font-semibold text-lg mb-3">Technologies Used</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex space-x-4">
+                  <Button
+                    onClick={(e) => handleLiveClick(selectedProject, e)}
+                    className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                  >
+                    <Clock className="h-5 w-5" />
+                    <span>Preview</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => window.open(selectedProject.githubUrl, "_blank")}
+                    className="flex items-center space-x-2"
+                  >
+                    <Github className="h-5 w-5" />
+                    <span>View Code</span>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Not Live Popup */}
+      <AnimatePresence>
+        {notLiveProject && <NotLivePopup project={notLiveProject} onClose={() => setNotLiveProject(null)} />}
+      </AnimatePresence>
+    </section>
+  )
+}
